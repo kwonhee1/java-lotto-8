@@ -17,6 +17,10 @@ public class Lotto {
         return numbers;
     }
 
+    public boolean contains(Integer otherNumber) {
+        return numbers.contains(otherNumber);
+    }
+
     static private class Validator {
         public static void validateLotto(List<Integer> numbers) {
             validateLottoCount(numbers);

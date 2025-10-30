@@ -36,4 +36,15 @@ class LottoTest {
         Assertions.assertThatThrownBy(()->new Lotto(listWithLowInt))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("Lotto는 다른 숫자를 포함하는지 판단해준다")
+    public void containTest() {
+        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
+        Integer otherNumber = 5;
+
+        boolean isContain = lotto.contains(otherNumber);
+
+        Assertions.assertThat(isContain).isTrue();
+    }
 }
