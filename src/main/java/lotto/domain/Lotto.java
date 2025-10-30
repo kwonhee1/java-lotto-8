@@ -9,7 +9,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        Validator.validateNumbers(numbers);
+        Validator.validateLotto(numbers);
         this.numbers = numbers;
     }
 
@@ -18,14 +18,14 @@ public class Lotto {
     }
 
     static private class Validator {
-        public static void validateNumbers(List<Integer> numbers) {
-            validateNumberLength(numbers);
+        public static void validateLotto(List<Integer> numbers) {
+            validateLottoCount(numbers);
             for(Integer number : numbers)
                 LottoNumberValidator.validateLottoNumber(number);
             validateDuplicateNumber(numbers);
         }
 
-        private static void validateNumberLength(List<Integer> numbers) {
+        private static void validateLottoCount(List<Integer> numbers) {
             if (numbers.size() != 6)
                 throw new IllegalLottoCountException();
         }
