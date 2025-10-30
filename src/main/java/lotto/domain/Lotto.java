@@ -1,20 +1,48 @@
 package lotto.domain;
 
 import java.util.List;
+import lotto.domain.exception.DuplicateLottoNumberException;
+import lotto.domain.exception.IllegalLottoCountException;
+import lotto.validator.LottoNumberValidator;
 
 public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validate(numbers);
+        Validator.validateNumbers(numbers);
         this.numbers = numbers;
     }
 
-    private void validate(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
-        }
+    public List<Integer> getLottoNumbers() {
+        return numbers;
     }
 
-    // TODO: 추가 기능 구현
+    static private class Validator {
+        public static void validateNumbers(List<Integer> numbers) {
+            validateNumberLength(numbers);
+            for(Integer number : numbers)
+                LottoNumberValidator.validateLottoNumber(number);
+            validateDuplicateNumber(numbers);
+        }
+
+        private static void validateNumberLength(List<Integer> numbers) {
+            if (numbers.size() != 6)
+                throw new IllegalLottoCountException();
+        }
+
+        private static void validateDuplicateNumber(List<Integer> numbers) {
+            for(int i = 0; i < numbers.size(); i++) {
+                if(isContainDuplicateNumber(numbers.get(i), numbers, i+1, numbers.size()))
+                    throw new DuplicateLottoNumberException();
+            }
+        }
+
+        private static boolean isContainDuplicateNumber(Integer targetNumber, List<Integer> numbers, int start, int end) {
+            for(int otherLottoIter = start; otherLottoIter < end; otherLottoIter++) {
+                if (targetNumber.equals(numbers.get(otherLottoIter)))
+                    return true;
+            }
+            return false;
+        }
+    }
 }

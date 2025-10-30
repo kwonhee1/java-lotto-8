@@ -1,4 +1,4 @@
 package lotto.domain.exception;
 
-public class LottoCountException {
+public class IllegalLottoCountException extends IllegalArgumentException {
 }
