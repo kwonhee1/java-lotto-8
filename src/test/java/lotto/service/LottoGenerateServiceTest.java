@@ -2,10 +2,7 @@ package lotto.service;
 
 import java.util.List;
 import lotto.domain.Lotto;
-<<<<<<< HEAD
-=======
 import lotto.domain.vo.LottoPurchaseCount;
->>>>>>> 1612ff3 (save)
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,16 +14,10 @@ public class LottoGenerateServiceTest {
     @Test
     @DisplayName("lotto generate service는 lotto를 생성합니다")
     public void generateLottoTest() {
-        List<Lotto> lottos = service.generateLottos(3);
+        LottoPurchaseCount tryCount = new LottoPurchaseCount(3);
+        List<Lotto> lottos = service.generateLottos(tryCount);
 
         Assertions.assertThat(lottos.size()).isEqualTo(3);
-    }
-
-    @Test
-    @DisplayName("Lotto 생성은 1개 이상만 가능합니다")
-    public void generateIllegalLottoCountTest() {
-        Assertions.assertThatThrownBy(() -> service.generateLottos(0))
-                .isInstanceOf(IllegalArgumentException.class);
     }
 
 }
