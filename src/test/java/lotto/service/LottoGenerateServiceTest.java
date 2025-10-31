@@ -2,6 +2,10 @@ package lotto.service;
 
 import java.util.List;
 import lotto.domain.Lotto;
+<<<<<<< HEAD
+=======
+import lotto.domain.vo.LottoPurchaseCount;
+>>>>>>> 1612ff3 (save)
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

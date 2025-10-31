@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.domain.exception;
 
 public class IllegalLottoTryCountException extends IllegalArgumentException {
 }
