@@ -14,4 +14,8 @@ public class LottoResultDto {
         return rank.getPrice();
     }
 
+    public LottoRank getLottoRank() {
+        return rank;
+    }
+
 }
