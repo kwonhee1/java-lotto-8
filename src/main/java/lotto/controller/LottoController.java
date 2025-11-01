@@ -17,15 +17,15 @@ public class LottoController {
     private InputView inputView = new InputView();
     private OutputView outputView = new OutputView();
 
-    private LottoGenerateService lottoGenerateService = new  LottoGenerateService();
+    private LottoGenerateService generateService = new  LottoGenerateService();
     private LotteryDrawService lotteryDrawService = new  LotteryDrawService();
 
     public void run() {
         LottoPurchaseCount purchaseCount = inputLottoTryCount();
         List<Lotto> purchasedLottos = generateLottos(purchaseCount);
         WinningLotto winningLotto = inputWinningLotto();
-        TotalLottoResultDto result = lotteryDraw(winningLotto, purchasedLottos);
-        printLottoResult(result, purchaseCount);
+        TotalLottoResultDto lottoDrawResult = lotteryDraw(winningLotto, purchasedLottos);
+        printLottoResult(lottoDrawResult, purchaseCount);
     }
 
     private LottoPurchaseCount inputLottoTryCount() {
@@ -39,7 +39,7 @@ public class LottoController {
     }
 
     private List<Lotto> generateLottos(LottoPurchaseCount lottoPurchaseCount) {
-        List<Lotto> generatedLottoList = lottoGenerateService.generateLottos(lottoPurchaseCount);
+        List<Lotto> generatedLottoList = generateService.generateLottos(lottoPurchaseCount);
 
         outputView.print(OutputMapper.lottoListToString(generatedLottoList));
 
