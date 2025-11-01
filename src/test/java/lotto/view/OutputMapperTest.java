@@ -38,9 +38,10 @@ public class OutputMapperTest {
     @DisplayName("lotto 결과를 출력하기 위한 message")
     public void totalLottoResultToStringTest() {
         TotalLottoResultDto totalResult = new TotalLottoResultDto();
-        totalResult.addResult(new LottoResultDto(LottoRank.THIRD));
+        totalResult.addResult(new LottoResultDto(LottoRank.FIFTH));
 
         Assertions.assertThat(OutputMapper.totalLottoResultToString(totalResult))
+                .contains("당첨 통계\n---")
                 .contains("3개 일치 (5,000원) - 1개")
                 .contains("4개 일치 (50,000원) - 0개")
                 .contains("5개 일치 (1,500,000원) - 0개")

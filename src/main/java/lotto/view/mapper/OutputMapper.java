@@ -23,9 +23,9 @@ public class OutputMapper {
     }
 
     public static String totalLottoResultToString(TotalLottoResultDto result) {
-        StringBuilder resultBuilder = new StringBuilder(OutputMessage.RESULT_START.outputMessage());
+        StringBuilder resultBuilder = new StringBuilder(OutputMessage.RESULT_START.outputMessage() + "\n");
 
-        for(LottoRank eachRank : LottoRank.values()){ // values 함수 변경하기!
+        for(LottoRank eachRank : LottoRank.valuesOrderPrice()){
             String eachResultDescribe = lottoResultToString(
                     eachRank,
                     result.getWinningCount(eachRank)

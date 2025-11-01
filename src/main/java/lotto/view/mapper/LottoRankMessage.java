@@ -5,11 +5,11 @@ import lotto.domain.LottoRank;
 
 public enum LottoRankMessage {
 
-    FIRST(LottoRank.FIRST, "6개 일치 (%,d)"),
-    SECOND(LottoRank.SECOND, "5개 일치, 보너스 볼 일치 (%,d)"),
-    THIRD(LottoRank.THIRD, "5개 일치 (%,d)"),
-    FOURTH(LottoRank.FOURTH, "4개 일치 (%,d)"),
-    FIFTH(LottoRank.FIFTH, "3개 일치 (%,d)");
+    FIRST(LottoRank.FIRST, "6개 일치 (%,d원)"),
+    SECOND(LottoRank.SECOND, "5개 일치, 보너스 볼 일치 (%,d원)"),
+    THIRD(LottoRank.THIRD, "5개 일치 (%,d원)"),
+    FOURTH(LottoRank.FOURTH, "4개 일치 (%,d원)"),
+    FIFTH(LottoRank.FIFTH, "3개 일치 (%,d원)");
 
     private LottoRank lottoRank;
     private String describe;
