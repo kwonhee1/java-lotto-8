@@ -1,5 +1,6 @@
 package lotto.domain.vo;
 
+import lotto.constraint.LottoConstraint;
 import lotto.domain.exception.IllegalLottoTryPriceException;
 
 public class LottoPurchasePrice {
@@ -12,7 +13,7 @@ public class LottoPurchasePrice {
     }
 
     public LottoPurchaseCount toLottoTryCount() {
-        return new LottoPurchaseCount(this.price / 1000);
+        return new LottoPurchaseCount(this.price / LottoConstraint.LOTTO_PRICE);
     }
 
     public int value() {
@@ -20,14 +21,14 @@ public class LottoPurchasePrice {
     }
 
     public static int getPriceFromPurchaseCount(LottoPurchaseCount count) {
-        return count.value() * 1000;
+        return count.value() * LottoConstraint.LOTTO_PRICE;
     }
 
     private void validateLottoTryPrice (Integer price) {
         if(price== null)
             throw new IllegalLottoTryPriceException(0);
 
-        if(price % 1000 != 0)
+        if(price % LottoConstraint.LOTTO_PRICE != 0)
             throw new IllegalLottoTryPriceException(price);
     }
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import lotto.constraint.LottoConstraint;
 import lotto.domain.exception.DuplicateLottoNumberException;
 import lotto.domain.exception.IllegalLottoCountException;
 import lotto.validator.LottoNumberValidator;
@@ -30,7 +31,7 @@ public class Lotto {
         }
 
         private static void validateLottoCount(List<Integer> numbers) {
-            if (numbers.size() != 6)
+            if (numbers.size() != LottoConstraint.LOTTO_COUNT)
                 throw new IllegalLottoCountException();
         }
 
