@@ -21,20 +21,21 @@ public class LottoController {
     private LotteryDrawService lotteryDrawService = new  LotteryDrawService();
 
     public void run() {
-        LottoPurchasePrice purchasePrice = inputLottoTryCount();
-        List<Lotto> purchasedLottos = generateLottos(purchasePrice.toLottoTryCount());
+        LottoPurchaseCount purchaseCount = inputLottoTryCount();
+        List<Lotto> purchasedLottos = generateLottos(purchaseCount);
         WinningLotto winningLotto = inputWinningLotto();
         TotalLottoResultDto result = lotteryDraw(winningLotto, purchasedLottos);
-        printLottoResult(result, purchasePrice);
+        printLottoResult(result, purchaseCount);
     }
 
-    private LottoPurchasePrice inputLottoTryCount() {
+    private LottoPurchaseCount inputLottoTryCount() {
         Integer inputPurchasePrice = inputView.inputPurchaseLottoPrice();
         LottoPurchasePrice purchasePrice = new LottoPurchasePrice(inputPurchasePrice);
+        LottoPurchaseCount purchaseCount = purchasePrice.toLottoTryCount();
 
-        outputView.print(OutputMapper.lottoPurchaseCountToString(purchasePrice.toLottoTryCount()));
+        outputView.print(OutputMapper.lottoPurchaseCountToString(purchaseCount));
 
-        return purchasePrice;
+        return purchaseCount;
     }
 
     private List<Lotto> generateLottos(LottoPurchaseCount lottoPurchaseCount) {
@@ -55,8 +56,9 @@ public class LottoController {
         return lotteryDrawService.lotteryDraw(winningLotto, lottos);
     }
 
-    private void printLottoResult(TotalLottoResultDto result, LottoPurchasePrice purchasePrice) {
+    private void printLottoResult(TotalLottoResultDto result, LottoPurchaseCount purchaseCount) {
         outputView.print(OutputMapper.totalLottoResultToString(result));
+        int purchasePrice = LottoPurchasePrice.getPriceFromPurchaseCount(purchaseCount);
         outputView.print(OutputMapper.getWinningRate(purchasePrice, result.getTotalWinningPrice()));
     }
 

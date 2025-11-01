@@ -37,8 +37,8 @@ public class OutputMapper {
         return resultBuilder.toString();
     }
 
-    public static String getWinningRate(LottoPurchasePrice purchasePrice, int totalWinningPrice) {
-        double winningRate = (double)totalWinningPrice / purchasePrice.value() * 100;
+    public static String getWinningRate(int purchasePrice, int totalWinningPrice) {
+        double winningRate = (double)totalWinningPrice / purchasePrice * 100;
         return String.format(OutputMessage.WINNING_RATE.outputMessage(), winningRate).toString();
     }
 

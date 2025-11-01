@@ -55,7 +55,7 @@ public class OutputMapperTest {
         int purchasePrice = 8000;
         int winningPrice = 5000;
 
-        Assertions.assertThat(OutputMapper.getWinningRate(new LottoPurchasePrice(purchasePrice), winningPrice))
+        Assertions.assertThat(OutputMapper.getWinningRate(purchasePrice, winningPrice))
                 .isEqualTo("총 수익률은 62.5%입니다.");
     }
 

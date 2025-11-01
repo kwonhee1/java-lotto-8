@@ -19,6 +19,10 @@ public class LottoPurchasePrice {
         return price;
     }
 
+    public static int getPriceFromPurchaseCount(LottoPurchaseCount count) {
+        return count.value() * 1000;
+    }
+
     private void validateLottoTryPrice (Integer price) {
         if(price== null)
             throw new IllegalLottoTryPriceException(0);
