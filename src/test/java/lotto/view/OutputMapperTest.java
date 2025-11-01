@@ -4,8 +4,6 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.vo.LottoPurchaseCount;
-import lotto.domain.vo.LottoPurchasePrice;
-import lotto.dto.LottoResultDto;
 import lotto.dto.TotalLottoResultDto;
 import lotto.view.mapper.OutputMapper;
 import org.assertj.core.api.Assertions;
@@ -38,7 +36,7 @@ public class OutputMapperTest {
     @DisplayName("lotto 결과를 출력하기 위한 message")
     public void totalLottoResultToStringTest() {
         TotalLottoResultDto totalResult = new TotalLottoResultDto();
-        totalResult.addResult(new LottoResultDto(LottoRank.FIFTH));
+        totalResult.addResult(LottoRank.FIFTH);
 
         Assertions.assertThat(OutputMapper.totalLottoResultToString(totalResult))
                 .contains("당첨 통계\n---")

@@ -24,7 +24,7 @@ public class LotteryDrawServiceTest {
 
         TotalLottoResultDto result = lotteryDrawService.lotteryDraw(winningLotto, lottos);
         TotalLottoResultDto expected = new TotalLottoResultDto();
-        expected.addResult(new LottoResult(5,true).toDto());
+        expected.addResult(new LottoResult(5,true).lottoRank());
 
         org.junit.jupiter.api.Assertions.assertAll(
                 ()->Assertions.assertThat(result.getTotalLottoCount())

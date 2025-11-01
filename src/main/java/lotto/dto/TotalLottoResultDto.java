@@ -10,10 +10,10 @@ public class TotalLottoResultDto {
     private int totalWinningPrice = 0;
     private Map<LottoRank, Integer> resultMap = new HashMap<LottoRank, Integer>();
 
-    public void addResult(LottoResultDto lottoResult) {
+    public void addResult(LottoRank rank) {
         lottoCount++;
-        totalWinningPrice += lottoResult.getPrice();
-        LottoRank resultRank = lottoResult.getLottoRank();
+        totalWinningPrice += rank.getPrice();
+        LottoRank resultRank = rank;
         resultMap.put(resultRank, oldValue(resultRank)+1);
     }
 

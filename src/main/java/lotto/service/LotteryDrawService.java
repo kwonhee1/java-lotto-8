@@ -13,7 +13,7 @@ public class LotteryDrawService {
 
         for(Lotto eachLotto : lottos) {
             LottoResult eachResult = lotteryDraw(winningLotto, eachLotto);
-            totalResult.addResult(eachResult.toDto());
+            totalResult.addResult(eachResult.lottoRank());
         }
 
         return totalResult;

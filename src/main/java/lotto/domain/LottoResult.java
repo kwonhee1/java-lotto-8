@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.LottoResultDto;
-
 public class LottoResult {
 
     private LottoRank rank;
@@ -10,8 +8,8 @@ public class LottoResult {
         this.rank = findRank(winningCount, isBonus);
     }
 
-    public LottoResultDto toDto() {
-        return new LottoResultDto(rank);
+    public LottoRank lottoRank() {
+        return rank;
     }
 
     private LottoRank findRank(int winningCount, boolean isBonus) {
