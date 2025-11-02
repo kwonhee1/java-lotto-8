@@ -32,5 +32,5 @@ public class SplitUtilTest {
                 ()-> Assertions.assertThat(after).hasSize(6)
         );
     }
-    
+
 }

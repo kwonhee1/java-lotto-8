@@ -1,7 +1,7 @@
 package lotto.domain.vo;
 
 import lotto.constraint.LottoConstraint;
-import lotto.domain.exception.IllegalLottoTryPriceException;
+import lotto.domain.exception.IllegalLottoPruchasePriceException;
 
 public class LottoPurchasePrice {
 
@@ -26,9 +26,9 @@ public class LottoPurchasePrice {
 
     private void validateLottoTryPrice (Integer price) {
         if(price== null)
-            throw new IllegalLottoTryPriceException(0);
+            throw new IllegalLottoPruchasePriceException(0);
 
         if(price % LottoConstraint.LOTTO_PRICE != 0)
-            throw new IllegalLottoTryPriceException(price);
+            throw new IllegalLottoPruchasePriceException(price);
     }
 }

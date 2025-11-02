@@ -1,9 +1,9 @@
 package lotto.domain.exception;
 
-public class IllegalLottoTryPriceException extends IllegalArgumentException{
+public class IllegalLottoPruchasePriceException extends IllegalArgumentException{
     private final int price;
 
-    public IllegalLottoTryPriceException(int price) {
+    public IllegalLottoPruchasePriceException(int price) {
         this.price = price;
     }
 

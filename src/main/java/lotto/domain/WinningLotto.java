@@ -2,8 +2,6 @@ package lotto.domain;
 
 import java.util.List;
 import lotto.domain.exception.DuplicateLottoNumberException;
-import lotto.domain.exception.IllegalLottoCountException;
-import lotto.domain.exception.IllegalLottoNumberException;
 import lotto.validator.LottoNumberValidator;
 
 public class WinningLotto {

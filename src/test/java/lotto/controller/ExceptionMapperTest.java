@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.controller.exception.ExceptionMapper;
-import lotto.domain.exception.IllegalLottoCountException;
+import lotto.domain.exception.IllegalLottoLengthException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ public class ExceptionMapperTest {
     public void noHandlerExceptionMapperTest() {
         ExceptionMapper exceptionMapper = new ExceptionMapper(new TestExceptionHandler());
 
-        Assertions.assertThatThrownBy(() -> exceptionMapper.toMessage(new IllegalLottoCountException()))
+        Assertions.assertThatThrownBy(() -> exceptionMapper.toMessage(new IllegalLottoLengthException()))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -1,10 +1,10 @@
 package lotto.controller.exception;
 
 import lotto.domain.exception.DuplicateLottoNumberException;
-import lotto.domain.exception.IllegalLottoCountException;
+import lotto.domain.exception.IllegalLottoLengthException;
 import lotto.domain.exception.IllegalLottoNumberException;
-import lotto.domain.exception.IllegalLottoTryCountException;
-import lotto.domain.exception.IllegalLottoTryPriceException;
+import lotto.domain.exception.IllegalLottoPurchaseCountException;
+import lotto.domain.exception.IllegalLottoPruchasePriceException;
 import lotto.view.ErrorMessage;
 
 public class ExceptionHandler {
@@ -21,12 +21,12 @@ public class ExceptionHandler {
         return ErrorMessage.ILLEGAL_LOTTO_NUMBER.getMessage(String.valueOf(e.getIllegalLottoNumber()));
     }
 
-    @TargetException(IllegalLottoCountException.class)
+    @TargetException(IllegalLottoLengthException.class)
     public <T extends IllegalArgumentException> String illegalLottoCount(T exception) {
         return ErrorMessage.ILLEGAL_LOTTO_LENGTH.getMessage();
     }
 
-    @TargetException({IllegalLottoTryCountException.class, IllegalLottoTryPriceException.class})
+    @TargetException({IllegalLottoPurchaseCountException.class, IllegalLottoPruchasePriceException.class})
     public <T extends IllegalArgumentException> String IllegalPurchaseLotto(T exception) {
         return ErrorMessage.ILLEGAL_PURCHASE_LOTTO_PRICE.getMessage();
     }

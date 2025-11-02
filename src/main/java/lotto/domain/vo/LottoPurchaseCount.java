@@ -1,6 +1,6 @@
 package lotto.domain.vo;
 
-import lotto.domain.exception.IllegalLottoTryCountException;
+import lotto.domain.exception.IllegalLottoPurchaseCountException;
 
 public class LottoPurchaseCount {
     private int tryCount;
@@ -16,7 +16,7 @@ public class LottoPurchaseCount {
 
     private void validateLottoTryCount(Integer tryCount) {
         if (tryCount == null || tryCount < 1) {
-            throw new IllegalLottoTryCountException();
+            throw new IllegalLottoPurchaseCountException();
         }
     }
 
