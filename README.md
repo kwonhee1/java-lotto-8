@@ -10,6 +10,7 @@
 # 이번 주차 목표
 - service 또한 한가지 일만 하게 분리한다 (Service UseCase분리)
 - test 코드를 목적을 명확하게 하고 작성한다
+- 한 가지의 기능을 두 가지의 class에서 실행하지 않는다
 
 # domain 분리
 - Lotto
