@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.constraint.LottoConstraint;
 import lotto.domain.Lotto;
-import lotto.domain.vo.LottoPurchaseCount;
 
 public class LottoGenerateService {
 
-    public List<Lotto> generateLottos(LottoPurchaseCount tryCount) {
+    public List<Lotto> generateLottos(int count) {
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < tryCount.value(); i++){
+        for (int i = 0; i < count; i++){
             List<Integer> randomIntegers = Randoms.pickUniqueNumbersInRange(
                     LottoConstraint.LOTTO_RANGE_START_INCLUSIVE,
                     LottoConstraint.LOTTO_RANGE_END_INCLUSIVE,

@@ -3,7 +3,7 @@ package lotto.service;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.service.LottoGenerateService;
-import lotto.domain.vo.LottoPurchaseCount;
+import lotto.domain.vo.LottoPurchasePrice;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,8 +15,7 @@ public class LottoGenerateServiceTest {
     @Test
     @DisplayName("lotto generate service는 lotto를 생성합니다")
     public void generateLottoTest() {
-        LottoPurchaseCount tryCount = new LottoPurchaseCount(3);
-        List<Lotto> lottos = service.generateLottos(tryCount);
+        List<Lotto> lottos = service.generateLottos(3);
 
         Assertions.assertThat(lottos.size()).isEqualTo(3);
     }

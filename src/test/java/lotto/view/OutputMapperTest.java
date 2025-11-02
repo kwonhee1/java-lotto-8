@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
-import lotto.domain.vo.LottoPurchaseCount;
+import lotto.domain.vo.LottoPurchasePrice;
 import lotto.dto.TotalLottoResultDto;
 import lotto.view.mapper.OutputMapper;
 import org.assertj.core.api.Assertions;
@@ -15,9 +15,9 @@ public class OutputMapperTest {
     @Test
     @DisplayName("lotto 구매 갯수를 출력하기 위한 message")
     public void lottoPurchaseCountToStringTest() {
-        int count = 3;
+        int price = 3000;
 
-        Assertions.assertThat(OutputMapper.lottoPurchaseCountToString(new LottoPurchaseCount(count)))
+        Assertions.assertThat(OutputMapper.lottoPurchaseCountToString(new LottoPurchasePrice(price)))
                 .isEqualTo("3개를 구매했습니다.");
     }
 

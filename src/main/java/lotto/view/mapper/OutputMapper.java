@@ -3,13 +3,13 @@ package lotto.view.mapper;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
-import lotto.domain.vo.LottoPurchaseCount;
+import lotto.domain.vo.LottoPurchasePrice;
 import lotto.dto.TotalLottoResultDto;
 
 public class OutputMapper {
 
-    public static String lottoPurchaseCountToString(LottoPurchaseCount purchaseCount) {
-        return String.format(OutputMessage.PURCHASE_LOTTO_COUNT.outputMessage(), purchaseCount.value()).toString();
+    public static String lottoPurchaseCountToString(LottoPurchasePrice purchaseInfo) {
+        return String.format(OutputMessage.PURCHASE_LOTTO_COUNT.outputMessage(), purchaseInfo.toCount()).toString();
     }
 
     public static String lottoListToString(List<Lotto> lottoList) {

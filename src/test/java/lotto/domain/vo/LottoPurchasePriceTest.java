@@ -13,14 +13,24 @@ public class LottoPurchasePriceTest {
                 .isInstanceOf(IllegalArgumentException.class);
         Assertions.assertThatThrownBy(()->new LottoPurchasePrice(1100))
                 .isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(()->new LottoPurchasePrice(0))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("Lotto purchase price는 Lotto count를 반환합니다")
-    public void toLottoTryCountTest() {
-        LottoPurchaseCount lottoCount = new LottoPurchasePrice(2000).toLottoTryCount();
+    public void toLottoTryToCountTest() {
+        LottoPurchasePrice lottoCount = new LottoPurchasePrice(2000);
 
-        Assertions.assertThat(lottoCount.value()).isEqualTo(2);
+        Assertions.assertThat(lottoCount.toCount()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("Lotto purchase price는 Lotto price를 반환합니다")
+    public void toLottoTryPriceTest() {
+        LottoPurchasePrice lottoCount = new LottoPurchasePrice(2000);
+
+        Assertions.assertThat(lottoCount.price).isEqualTo(2000);
     }
 
 }
