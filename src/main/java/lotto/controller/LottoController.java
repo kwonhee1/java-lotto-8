@@ -1,6 +1,8 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.function.Supplier;
+import lotto.controller.exception.ExceptionMapper;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
@@ -18,13 +20,15 @@ public class LottoController {
     private InputView inputView = new InputView();
     private OutputView outputView = new OutputView();
 
+    private ExceptionMapper exceptionMapper = new ExceptionMapper();
+
     private LottoGenerateService generateService = new  LottoGenerateService();
     private LotteryDrawService lotteryDrawService = new  LotteryDrawService();
 
     public void run() {
-        LottoPurchaseCount purchaseCount = inputLottoTryCount();
+        LottoPurchaseCount purchaseCount = supply(()->inputLottoTryCount());
         List<Lotto> purchasedLottos = generateLottos(purchaseCount);
-        WinningLotto winningLotto = inputWinningLotto();
+        WinningLotto winningLotto = supply(()->inputWinningLotto());
         List<LottoResult> lottoDrawResult = lotteryDraw(winningLotto, purchasedLottos);
         printLottoResult(lottoDrawResult, purchaseCount);
     }
@@ -70,6 +74,16 @@ public class LottoController {
         TotalLottoResultDto dto = new TotalLottoResultDto();
         drawResult.forEach(result->dto.addResult(result.lottoRank()));
         return dto;
+    }
+
+    private <T> T supply(Supplier<T> supplier) {
+        while(true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                outputView.print(exceptionMapper.toMessage(e));
+            }
+        }
     }
 
 }
