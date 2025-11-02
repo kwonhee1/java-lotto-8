@@ -5,18 +5,19 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ExceptionMapper {
+public class ExceptionMapper <Handler> {
 
-    private static final ExceptionHandler exceptionHandler = new ExceptionHandler();
+    private final Handler exceptionHandler;
 
     private final Map<Class<? extends IllegalArgumentException>, Method> MESSAGES_MAP = new HashMap<>();
 
-    public ExceptionMapper() {
-        initMessageMap();
+    public ExceptionMapper(Handler handlerClass) {
+        exceptionHandler = handlerClass;
+        initMessageMap(handlerClass.getClass());
     }
 
-    private void initMessageMap() {
-        for(Method method : ExceptionHandler.class.getDeclaredMethods()) {
+    private void initMessageMap(Class handlerClass) {
+        for(Method method : handlerClass.getDeclaredMethods()) {
             TargetException annotation = method.getDeclaredAnnotation(TargetException.class);
 
             if(annotation == null)

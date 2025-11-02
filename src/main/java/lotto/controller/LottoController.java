@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.function.Supplier;
+import lotto.controller.exception.ExceptionHandler;
 import lotto.controller.exception.ExceptionMapper;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
@@ -20,7 +21,7 @@ public class LottoController {
     private InputView inputView;
     private OutputView outputView;
 
-    private ExceptionMapper exceptionMapper = new ExceptionMapper();
+    private ExceptionMapper exceptionMapper = new ExceptionMapper(new ExceptionHandler());
 
     private LottoGenerateService generateService = new LottoGenerateService();
     private LotteryDrawService lotteryDrawService = new LotteryDrawService();
