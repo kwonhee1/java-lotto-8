@@ -1,8 +1,8 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
 import java.util.List;
+import lotto.util.SplitUtil;
 
 public class InputView {
 
@@ -13,10 +13,8 @@ public class InputView {
 
     public List<Integer> inputWinningLottoNumbers() {
         System.out.println(InputViewMessage.WINNING_NUMBER.getMessage());
-        String[] inputNumbers =  Console.readLine().split(",");
-        return Arrays.stream(inputNumbers)
-                .map(Integer::parseInt)
-                .toList();
+        String input = Console.readLine();
+        return SplitUtil.split(input, SplitUtil.COMMA, Integer::parseInt);
     }
 
     public Integer inputBonusNumber() {
