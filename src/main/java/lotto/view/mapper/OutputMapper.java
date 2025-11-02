@@ -4,7 +4,6 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.vo.LottoPurchaseCount;
-import lotto.domain.vo.LottoPurchasePrice;
 import lotto.dto.TotalLottoResultDto;
 
 public class OutputMapper {

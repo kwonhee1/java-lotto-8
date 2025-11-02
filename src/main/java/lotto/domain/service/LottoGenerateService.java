@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.domain.service;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;

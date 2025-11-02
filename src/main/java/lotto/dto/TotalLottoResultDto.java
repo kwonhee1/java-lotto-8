@@ -6,15 +6,15 @@ import lotto.domain.LottoRank;
 
 public class TotalLottoResultDto {
 
+    private Map<LottoRank, Integer> lottoResultMap = new HashMap<LottoRank, Integer>();
+
     private int lottoCount = 0;
     private int totalWinningPrice = 0;
-    private Map<LottoRank, Integer> resultMap = new HashMap<LottoRank, Integer>();
 
-    public void addResult(LottoRank rank) {
+    public void addResult(LottoRank lottoRank) {
+        lottoResultMap.put(lottoRank, oldValue(lottoRank)+1);
         lottoCount++;
-        totalWinningPrice += rank.getPrice();
-        LottoRank resultRank = rank;
-        resultMap.put(resultRank, oldValue(resultRank)+1);
+        totalWinningPrice += lottoRank.getPrice();
     }
 
     public int getTotalLottoCount() {
@@ -26,12 +26,12 @@ public class TotalLottoResultDto {
     }
 
     public int getWinningCount(LottoRank lottoRank) {
-        Integer winningCount = resultMap.get(lottoRank);
+        Integer winningCount = lottoResultMap.get(lottoRank);
         return winningCount != null ? winningCount : 0;
     }
 
     public int getWinningPrice(LottoRank lottoRank) {
-        Integer count = resultMap.get(lottoRank);
+        Integer count = lottoResultMap.get(lottoRank);
 
         if(count == null)
             return 0;
@@ -40,9 +40,12 @@ public class TotalLottoResultDto {
     }
 
     private int oldValue(LottoRank lottoRank) {
-        Integer oldValue = resultMap.get(lottoRank);
+        Integer oldValue = lottoResultMap.get(lottoRank);
 
-        return oldValue != null ? oldValue : 0;
+        if(oldValue == null)
+            return 0;
+
+        return oldValue.intValue();
     }
 
 }

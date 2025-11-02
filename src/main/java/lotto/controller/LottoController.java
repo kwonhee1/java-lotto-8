@@ -2,12 +2,13 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
 import lotto.domain.vo.LottoPurchasePrice;
 import lotto.domain.vo.LottoPurchaseCount;
+import lotto.domain.service.LotteryDrawService;
+import lotto.domain.service.LottoGenerateService;
 import lotto.dto.TotalLottoResultDto;
-import lotto.service.LotteryDrawService;
-import lotto.service.LottoGenerateService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.view.mapper.OutputMapper;
@@ -24,7 +25,7 @@ public class LottoController {
         LottoPurchaseCount purchaseCount = inputLottoTryCount();
         List<Lotto> purchasedLottos = generateLottos(purchaseCount);
         WinningLotto winningLotto = inputWinningLotto();
-        TotalLottoResultDto lottoDrawResult = lotteryDraw(winningLotto, purchasedLottos);
+        List<LottoResult> lottoDrawResult = lotteryDraw(winningLotto, purchasedLottos);
         printLottoResult(lottoDrawResult, purchaseCount);
     }
 
@@ -52,14 +53,23 @@ public class LottoController {
         return new WinningLotto(inputWinningLottoNumbers, bonusNumber);
     }
 
-    private TotalLottoResultDto lotteryDraw(WinningLotto winningLotto, List<Lotto> lottos) {
+    private List<LottoResult> lotteryDraw(WinningLotto winningLotto, List<Lotto> lottos) {
         return lotteryDrawService.lotteryDraw(winningLotto, lottos);
     }
 
-    private void printLottoResult(TotalLottoResultDto result, LottoPurchaseCount purchaseCount) {
-        outputView.print(OutputMapper.totalLottoResultToString(result));
+    private void printLottoResult(List<LottoResult> drawResult, LottoPurchaseCount purchaseCount) {
+        TotalLottoResultDto resultDto = convertToTotalLottoResultDto(drawResult);
+
+        outputView.print(OutputMapper.totalLottoResultToString(resultDto));
+
         int purchasePrice = LottoPurchasePrice.getPriceFromPurchaseCount(purchaseCount);
-        outputView.print(OutputMapper.getWinningRate(purchasePrice, result.getTotalWinningPrice()));
+        outputView.print(OutputMapper.getWinningRate(purchasePrice, resultDto.getTotalWinningPrice()));
+    }
+
+    private TotalLottoResultDto convertToTotalLottoResultDto(List<LottoResult> drawResult) {
+        TotalLottoResultDto dto = new TotalLottoResultDto();
+        drawResult.forEach(result->dto.addResult(result.lottoRank()));
+        return dto;
     }
 
 }
