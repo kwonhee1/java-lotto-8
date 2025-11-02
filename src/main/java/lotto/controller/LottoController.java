@@ -17,13 +17,18 @@ import lotto.view.mapper.OutputMapper;
 
 public class LottoController {
 
-    private InputView inputView = new InputView();
-    private OutputView outputView = new OutputView();
+    private InputView inputView;
+    private OutputView outputView;
 
     private ExceptionMapper exceptionMapper = new ExceptionMapper();
 
-    private LottoGenerateService generateService = new  LottoGenerateService();
-    private LotteryDrawService lotteryDrawService = new  LotteryDrawService();
+    private LottoGenerateService generateService = new LottoGenerateService();
+    private LotteryDrawService lotteryDrawService = new LotteryDrawService();
+
+    public LottoController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
 
     public void run() {
         LottoPurchaseCount purchaseCount = supply(()->inputLottoTryCount());
