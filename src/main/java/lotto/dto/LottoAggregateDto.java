@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import lotto.domain.LottoRank;
 
-public class TotalLottoResultDto {
+public class LottoAggregateDto {
 
     private Map<LottoRank, Integer> lottoResultMap = new HashMap<LottoRank, Integer>();
 

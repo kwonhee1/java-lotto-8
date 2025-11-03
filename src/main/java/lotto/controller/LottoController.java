@@ -10,7 +10,8 @@ import lotto.domain.WinningLotto;
 import lotto.domain.vo.LottoPurchasePrice;
 import lotto.domain.service.LotteryDrawService;
 import lotto.domain.service.LottoGenerateService;
-import lotto.dto.TotalLottoResultDto;
+import lotto.dto.LottoAggregateDto;
+import lotto.service.LottoAggregateService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.view.mapper.OutputMapper;
@@ -24,6 +25,7 @@ public class LottoController {
 
     private LottoGenerateService generateService = new LottoGenerateService();
     private LotteryDrawService lotteryDrawService = new LotteryDrawService();
+    private LottoAggregateService lottoAggregateService = new LottoAggregateService();
 
     public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -34,8 +36,8 @@ public class LottoController {
         LottoPurchasePrice purchasePrice = supply(()->inputLottoTryCount());
         List<Lotto> purchasedLottos = generateLottos(purchasePrice);
         WinningLotto winningLotto = supply(()->inputWinningLotto());
-        List<LottoResult> lottoDrawResult = lotteryDraw(winningLotto, purchasedLottos);
-        printLottoResult(lottoDrawResult, purchasePrice);
+        LottoAggregateDto lotteryResult = processLotteryDraw(winningLotto, purchasedLottos);
+        printLottoResult(lotteryResult, purchasePrice);
     }
 
     private LottoPurchasePrice inputLottoTryCount() {
@@ -61,21 +63,16 @@ public class LottoController {
         return new WinningLotto(inputWinningLottoNumbers, bonusNumber);
     }
 
-    private List<LottoResult> lotteryDraw(WinningLotto winningLotto, List<Lotto> lottos) {
-        return lotteryDrawService.lotteryDraw(winningLotto, lottos);
+    private LottoAggregateDto processLotteryDraw(WinningLotto winningLotto, List<Lotto> lottos) {
+        List<LottoResult> drawResultList = lotteryDrawService.lotteryDraw(winningLotto, lottos);
+        LottoAggregateDto aggregateResultDto = lottoAggregateService.aggregate(drawResultList);
+
+        return aggregateResultDto;
     }
 
-    private void printLottoResult(List<LottoResult> drawResult, LottoPurchasePrice lottoPurchasePrice) {
-        TotalLottoResultDto resultDto = convertToTotalLottoResultDto(drawResult);
-
-        outputView.print(OutputMapper.totalLottoResultToString(resultDto));
-        outputView.print(OutputMapper.getWinningRate(lottoPurchasePrice.price(), resultDto.getTotalWinningPrice()));
-    }
-
-    private TotalLottoResultDto convertToTotalLottoResultDto(List<LottoResult> drawResult) {
-        TotalLottoResultDto dto = new TotalLottoResultDto();
-        drawResult.forEach(result->dto.addResult(result.lottoRank()));
-        return dto;
+    private void printLottoResult(LottoAggregateDto lotteryResult, LottoPurchasePrice lottoPurchasePrice) {
+        outputView.print(OutputMapper.totalLottoResultToString(lotteryResult));
+        outputView.print(OutputMapper.getWinningRate(lottoPurchasePrice.price(), lotteryResult.getTotalWinningPrice()));
     }
 
     private <T> T supply(Supplier<T> supplier) {

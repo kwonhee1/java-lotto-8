@@ -4,7 +4,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.vo.LottoPurchasePrice;
-import lotto.dto.TotalLottoResultDto;
+import lotto.dto.LottoAggregateDto;
 
 public class OutputMapper {
 
@@ -21,7 +21,7 @@ public class OutputMapper {
         return stringBuilder.toString();
     }
 
-    public static String totalLottoResultToString(TotalLottoResultDto result) {
+    public static String totalLottoResultToString(LottoAggregateDto result) {
         StringBuilder resultBuilder = new StringBuilder(OutputMessage.RESULT_START.outputMessage() + "\n");
 
         for(LottoRank eachRank : LottoRank.valuesOrderPrice()){

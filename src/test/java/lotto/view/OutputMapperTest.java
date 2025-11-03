@@ -4,7 +4,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.vo.LottoPurchasePrice;
-import lotto.dto.TotalLottoResultDto;
+import lotto.dto.LottoAggregateDto;
 import lotto.view.mapper.OutputMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -35,7 +35,7 @@ public class OutputMapperTest {
     @Test
     @DisplayName("lotto 결과를 출력하기 위한 message")
     public void totalLottoResultToStringTest() {
-        TotalLottoResultDto totalResult = new TotalLottoResultDto();
+        LottoAggregateDto totalResult = new LottoAggregateDto();
         totalResult.addResult(LottoRank.FIFTH);
 
         Assertions.assertThat(OutputMapper.totalLottoResultToString(totalResult))

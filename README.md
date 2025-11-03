@@ -30,8 +30,9 @@
     - 3개 일치 = 5등
   - 등수를 저장한다
 ## service use case
-- GenerateLottoService :: 로또 생성 담당
-- LotteryDrawService :: 로또 추첨 담당
+- GenerateLottoService :: 로또 생성 담당 (domain service)
+- LotteryDrawService :: 로또 추첨 담당 (domain service)
+- LottoAggregateService :: 결과 통합 담당 (application service)
 ## vo 
 - LottoPurchasePrice :: 로또 구매 가격
 - LottoPurchaseCount :: 로또 구매 횟수
